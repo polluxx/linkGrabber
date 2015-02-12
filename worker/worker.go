@@ -51,8 +51,8 @@ type Resp struct {
 }
 
 var (
-	//Servers = []string{"10.1.51.65","10.1.51.66"}
-	Servers = []string{"10.1.18.122"}
+	Servers = []string{"10.1.51.65","10.1.51.66"}
+	//Servers = []string{"10.1.18.122"}
 	Keyspace string = "avp"
 	Table string = "training_set"
 	Limit int = 200
@@ -269,7 +269,7 @@ func Put(data Resp) error{
 		}
 	}
 
-	cluster := gocql.NewCluster(Servers[0])
+	cluster := gocql.NewCluster(Servers[0], Servers[1])
 	cluster.Keyspace = Keyspace
 	//cluster.Consistency = gocql.One
 	session, err := cluster.CreateSession()
