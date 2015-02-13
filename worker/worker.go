@@ -281,18 +281,18 @@ func Put(data Resp) error{
 	var (
 		position int64
 		dynamic int64
-		cost float64
+		//cost float64
 		region_queries int64
 		search_concurrency int64
 		concurrency int64
-		url_id int64
-		datetime time.Time
-		right_spell_id int64
-		id int64
+		//url_id int64
+		//datetime time.Time
+		//right_spell_id int64
+		//id int64
 	)
 
 
-	location, _ := time.LoadLocation("Europe/Kiev")
+	//location, _ := time.LoadLocation("Europe/Kiev")
 
 	for _, row := range data.Data {
 
