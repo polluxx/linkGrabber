@@ -300,16 +300,16 @@ func Put(data Resp) error{
 
 		position, err = strconv.ParseInt(row.Position, 10, 64)
 		dynamic, err = strconv.ParseInt(row.Dynamic, 10, 64)
-		cost, err = strconv.ParseFloat(row.Cost, 64)
+		//cost, err = strconv.ParseFloat(row.Cost, 64)
 		region_queries, err = strconv.ParseInt(row.Region_queries_count, 10, 64)
 		search_concurrency, err = strconv.ParseInt(row.Search_concurrency, 10, 64)
 		concurrency, err = strconv.ParseInt(row.Concurrency, 10, 64)
-		url_id, err = strconv.ParseInt(row.Url_id, 10, 64)
-		right_spell_id, err = strconv.ParseInt(row.Right_spell_id, 10, 64)
-		id, err = strconv.ParseInt(row.Id, 10, 64)
+		//url_id, err = strconv.ParseInt(row.Url_id, 10, 64)
+		//right_spell_id, err = strconv.ParseInt(row.Right_spell_id, 10, 64)
+		//id, err = strconv.ParseInt(row.Id, 10, 64)
 
-		fromT := fmt.Sprintf("%sT00:00:00Z", row.Date)
-		datetime, err = time.ParseInLocation(time.RFC3339, fromT, location)
+		//fromT := fmt.Sprintf("%sT00:00:00Z", row.Date)
+		//datetime, err = time.ParseInLocation(time.RFC3339, fromT, location)
 		
 		if(err != nil) {
 			return err
@@ -323,18 +323,15 @@ func Put(data Resp) error{
 		
 		if err = session.Query(`INSERT INTO training_set
 							(keyword, position, dynamic,
- 							cost, region_queries_count, search_concurrency,
- 							concurrency, url_id, date,
- 							right_spell_id, id, geo_names,
- 							types, url, domain)
+ 							region_queries_count, search_concurrency,
+ 							concurrency, geo_names, url, domain)
 							VALUES
- 							(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+ 							(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 			row.Keyword, position, dynamic,
-			cost, region_queries, search_concurrency,
-			concurrency, url_id, datetime,
-			right_spell_id, id, row.Geo_names,
-			row.Types, row.Url, row.Domain).Exec(); err != nil {
-			return err
+			region_queries, search_concurrency,
+			concurrency, row.Geo_names,
+			row.Url, row.Domain).Exec(); err != nil {
+				return err
 		}
 
 		//log.Printf("%v", row)
